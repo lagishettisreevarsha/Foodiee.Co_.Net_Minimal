@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36310.24 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodiee.Co_WebApi", "Foodiee.Co_WebApi\Foodiee.Co_WebApi.csproj", "{DBE2AD61-E607-4D1A-94A4-1FEB97C8DF8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBE2AD61-E607-4D1A-94A4-1FEB97C8DF8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBE2AD61-E607-4D1A-94A4-1FEB97C8DF8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBE2AD61-E607-4D1A-94A4-1FEB97C8DF8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBE2AD61-E607-4D1A-94A4-1FEB97C8DF8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9383F996-1694-46FE-BA6B-D9A15FC93A3B}
+	EndGlobalSection
+EndGlobal
