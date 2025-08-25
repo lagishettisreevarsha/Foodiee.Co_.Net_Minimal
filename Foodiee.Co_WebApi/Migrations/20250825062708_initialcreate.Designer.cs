@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foodiee.Co_WebApi.Migrations
 {
     [DbContext(typeof(FoodieeDbContext))]
-    [Migration("20250821051959_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250825062708_initialcreate")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
