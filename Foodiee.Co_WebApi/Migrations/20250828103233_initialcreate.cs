@@ -37,6 +37,21 @@ namespace Foodiee.Co_WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Foods",
                 columns: table => new
                 {
@@ -46,7 +61,8 @@ namespace Foodiee.Co_WebApi.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Video = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,6 +73,11 @@ namespace Foodiee.Co_WebApi.Migrations
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Foods_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -83,6 +104,11 @@ namespace Foodiee.Co_WebApi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Email", "Name", "Password" },
+                values: new object[] { 1, "vars@gmail.com", "Varsha", "123456" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_FoodIngredients_IngredientId",
                 table: "FoodIngredients",
@@ -92,6 +118,17 @@ namespace Foodiee.Co_WebApi.Migrations
                 name: "IX_Foods_CategoryId",
                 table: "Foods",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Foods_UserId",
+                table: "Foods",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -108,6 +145,9 @@ namespace Foodiee.Co_WebApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

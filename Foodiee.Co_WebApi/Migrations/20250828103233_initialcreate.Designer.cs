@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foodiee.Co_WebApi.Migrations
 {
     [DbContext(typeof(FoodieeDbContext))]
-    [Migration("20250825062708_initialcreate")]
+    [Migration("20250828103233_initialcreate")]
     partial class initialcreate
     {
         /// <inheritdoc />
@@ -63,12 +63,17 @@ namespace Foodiee.Co_WebApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Video")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("FoodId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Foods");
                 });
@@ -105,6 +110,43 @@ namespace Foodiee.Co_WebApi.Migrations
                     b.ToTable("Ingredients");
                 });
 
+            modelBuilder.Entity("Foodiee.Co_WebApi.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Email = "vars@gmail.com",
+                            Name = "Varsha",
+                            Password = "123456"
+                        });
+                });
+
             modelBuilder.Entity("Foodiee.Co_WebApi.Models.Food", b =>
                 {
                     b.HasOne("Foodiee.Co_WebApi.Models.Category", "Category")
@@ -113,7 +155,13 @@ namespace Foodiee.Co_WebApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Foodiee.Co_WebApi.Models.User", "User")
+                        .WithMany("Foods")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Category");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Foodiee.Co_WebApi.Models.FoodIngredient", b =>
@@ -148,6 +196,11 @@ namespace Foodiee.Co_WebApi.Migrations
             modelBuilder.Entity("Foodiee.Co_WebApi.Models.Ingredient", b =>
                 {
                     b.Navigation("FoodIngredients");
+                });
+
+            modelBuilder.Entity("Foodiee.Co_WebApi.Models.User", b =>
+                {
+                    b.Navigation("Foods");
                 });
 #pragma warning restore 612, 618
         }

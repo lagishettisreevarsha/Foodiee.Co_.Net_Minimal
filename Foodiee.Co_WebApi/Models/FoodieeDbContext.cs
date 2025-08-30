@@ -9,6 +9,7 @@ public class FoodieeDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Ingredient> Ingredients { get; set; }
     public DbSet<FoodIngredient> FoodIngredients { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -25,5 +26,28 @@ public class FoodieeDbContext : DbContext
             .HasOne(fi => fi.Ingredient)
             .WithMany(i => i.FoodIngredients)
             .HasForeignKey(fi => fi.IngredientId);
+
+        // One-to-Many Config (Category-Food)
+        modelBuilder.Entity<Food>()
+            .HasOne(f => f.Category)
+            .WithMany(c => c.Foods)
+            .HasForeignKey(f => f.CategoryId);
+
+        // One-to-Many Config (User-Food)
+        modelBuilder.Entity<Food>()
+            .HasOne(f => f.User)
+            .WithMany(u => u.Foods)
+            .HasForeignKey(f => f.UserId);
+
+        // User configuration
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.UserId);
+            entity.HasIndex(e => e.Email).IsUnique();
+        });
+
+        modelBuilder.Entity<User>().HasData(
+            new User {UserId=1,Name="Varsha",Email="vars@gmail.com",Password="123456" }
+            );
     }
 }
