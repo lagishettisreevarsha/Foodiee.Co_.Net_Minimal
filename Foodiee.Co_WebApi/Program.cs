@@ -49,11 +49,6 @@ var connectionString = builder.Configuration.GetConnectionString("Foodiee.Co_DbC
 // configure the DbContext options for TrainingDbContext
 builder.Services.AddDbContext<FoodieeDbContext>(options => options.UseSqlServer(connectionString));
 
-//// JWT Authentication
-//var jwtSection = builder.Configuration.GetSection("Jwt");
-//var jwtKey = jwtSection.GetValue<string>("Key");
-//var jwtIssuer = jwtSection.GetValue<string>("Issuer");
-//var jwtAudience = jwtSection.GetValue<string>("Audience");
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
