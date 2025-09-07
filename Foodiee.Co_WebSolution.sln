@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36310.24 d17.14
+VisualStudioVersion = 17.14.36310.24
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodiee.Co_WebApi", "Foodiee.Co_WebApi\Foodiee.Co_WebApi.csproj", "{DBE2AD61-E607-4D1A-94A4-1FEB97C8DF8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthWebApi", "AuthWebApi\AuthWebApi.csproj", "{5129C054-D879-411C-A092-2C0AFABFB250}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DBE2AD61-E607-4D1A-94A4-1FEB97C8DF8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBE2AD61-E607-4D1A-94A4-1FEB97C8DF8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBE2AD61-E607-4D1A-94A4-1FEB97C8DF8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5129C054-D879-411C-A092-2C0AFABFB250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5129C054-D879-411C-A092-2C0AFABFB250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5129C054-D879-411C-A092-2C0AFABFB250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5129C054-D879-411C-A092-2C0AFABFB250}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

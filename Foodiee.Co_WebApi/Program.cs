@@ -14,24 +14,41 @@ var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();
 var jwtSection = builder.Configuration.GetSection("Jwt");
 var jwtAudience = jwtSection.GetValue<string>("Audience");
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
- .AddJwtBearer(options =>
- {
-     options.TokenValidationParameters = new TokenValidationParameters
-     {
-         ValidateIssuer = true,
-         ValidateAudience = true,
-         ValidateLifetime = true,
-         ValidateIssuerSigningKey = true,
-         ValidIssuer = jwtIssuer,
-         ValidAudience = jwtAudience,
-         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
-     };
- });
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+// .AddJwtBearer(options =>
+// {
+//     options.TokenValidationParameters = new TokenValidationParameters
+//     {
+//         ValidateIssuer = true,
+//         ValidateAudience = true,
+//         ValidateLifetime = true,
+//         ValidateIssuerSigningKey = true,
+//         ValidIssuer = jwtIssuer,
+//         ValidAudience = jwtAudience,
+//         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+//     };
+// });
 //Jwt configuration ends here 
 
+// Enable Authentication with Google
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.Authority = "https://accounts.google.com";  // Google’s identity provider
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = "https://accounts.google.com",
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["GoogleAuth:ClientId"], // Google client ID
+        ValidateLifetime = true
+    };
+});
 
-//
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
@@ -96,7 +113,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
