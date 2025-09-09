@@ -3,7 +3,7 @@
 namespace Foodiee.Co_WebApi.DTO
 {
     public class CategoryDto
-        //
+        
     {
         [JsonPropertyName("Id")]
         public int Id { get; set; }
