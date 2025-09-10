@@ -79,7 +79,7 @@ namespace Foodiee.Co_WebApi.Controllers
                         .Where(name => !string.IsNullOrEmpty(name))
                         .ToList() ?? new List<string>()
                 };
-
+                //return Ok status code
                 return Ok(foodDto);
             }
             catch (Exception ex)
@@ -88,6 +88,7 @@ namespace Foodiee.Co_WebApi.Controllers
             }
         }
 
+        
         [HttpGet("category/{categoryId}")]
         public async Task<ActionResult<IEnumerable<FoodDto>>> GetFoodsByCategory(int categoryId)
         {
