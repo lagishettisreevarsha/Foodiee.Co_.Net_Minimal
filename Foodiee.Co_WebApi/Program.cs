@@ -31,6 +31,7 @@ var jwtAudience = jwtSection.GetValue<string>("Audience");
 //Jwt configuration ends here 
 
 // Enable Authentication with Google
+string clientId = "358960811500-ibtanjet1669jeu17pft1uiss4gb2frp.apps.googleusercontent.com";
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -44,7 +45,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuer = true,
         ValidIssuer = "https://accounts.google.com",
         ValidateAudience = true,
-        ValidAudience = builder.Configuration["GoogleAuth:ClientId"], // Google client ID
+        ValidAudience = builder.Configuration[clientId], // Google client ID
         ValidateLifetime = true
     };
 });
